@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký - StudyWeb</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4e73df;
+            --primary-light: #6c8bf5;
+            --secondary: #36b9cc;
+            --accent: #1cc88a;
+            --light: #f8f9fc;
+            --dark: #5a5c69;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --card-shadow: 0 10px 20px rgba(78, 115, 223, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7ff 0%, #e6e9ff 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin: 0 15px;
+        }
+
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: var(--gradient);
+            color: white;
+        }
+
+        /* Auth Section */
+        .auth-section {
+            padding: 50px 0;
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .auth-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            max-width: 500px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+
+        .auth-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: var(--gradient);
+        }
+
+        .auth-header {
+            text-align: center;
+            padding: 30px 20px 20px;
+        }
+
+        .auth-header h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .auth-body {
+            padding: 20px 40px 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e0e6ff;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-light);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(78, 115, 223, 0.2);
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--dark);
+        }
+
+        .form-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(78, 115, 223, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(78, 115, 223, 0.4);
+        }
+
+        /* Error message */
+        .error-message {
+            color: #e74a3b;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 20px 0 10px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        .footer-content {
+            padding: 10px 0;
+        }
+
+        .footer p {
+            opacity: 0.85;
+            margin: 5px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .auth-body {
+                padding: 20px 25px 30px;
+            }
+
+            .form-control {
+                padding: 12px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .auth-header h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="{{ url_for('home') }}" class="logo">
+                <span class="logo-icon"></span>
+                ZenTask
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="{{ url_for('home') }}" class="nav-link">Trang chủ</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Bài học</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Luyện tập</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Hồ sơ</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="auth-section">
+        <div class="container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h1>Đăng ký tài khoản</h1>
+                    <p>Tạo tài khoản để bắt đầu học tập</p>
+                </div>
+                <div class="auth-body">
+                    Web nghiên cứu trc khi học java nên kiểu gì cũng sẽ lỗi mong mọi người thông cảm! Nếu có sai sót thì liên hệ dev nhé!
+                    <form method="POST" action="{{ url_for('register') }}">
+                        <div class="form-group">
+                            <label for="username">Tên đăng nhập</label>
+                            <input type="text" id="username" name="username" class="form-control"
+                                placeholder="Nhập tên đăng nhập" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mật khẩu</label>
+                            <input type="password" id="password" name="password" class="form-control"
+                                placeholder="Nhập mật khẩu" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Đăng ký</button>
+                    </form>
+                    <div class="form-footer">
+                        <p>Đã có tài khoản? <a href="{{ url_for('login') }}">Đăng nhập ngay</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>© 2025 ZenTask - Nền tảng học tập thông minh</p>
+                <p>Phát triển bởi Trần Khang</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

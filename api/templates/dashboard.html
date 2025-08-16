@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng điều khiển - StudyWeb</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4e73df;
+            --primary-light: #6c8bf5;
+            --secondary: #36b9cc;
+            --accent: #1cc88a;
+            --light: #f8f9fc;
+            --dark: #5a5c69;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --card-shadow: 0 10px 20px rgba(78, 115, 223, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7ff 0%, #e6e9ff 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin: 0 15px;
+        }
+
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .dashboard-section {
+            padding: 50px 0;
+            flex: 1;
+        }
+
+        .dashboard-welcome {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .dashboard-welcome h1 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .dashboard-welcome p {
+            font-size: 1.2rem;
+            color: var(--dark);
+            opacity: 0.8;
+        }
+
+        .dashboard-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .action-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(78, 115, 223, 0.2);
+        }
+
+        .action-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .action-card p {
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(78, 115, 223, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(78, 115, 223, 0.5);
+        }
+
+        .pomodoro-section {
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            padding: 30px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .pomodoros-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .pomodoro-item {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 15px 25px;
+            font-weight: 500;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .pomodoro-item .minutes {
+            margin-right: 10px;
+        }
+
+        .pomodoro-item .start-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .pomodoro-item .start-btn:hover {
+            background: #17a673;
+        }
+
+        .add-pomodoro {
+            display: flex;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .add-pomodoro input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #e0e6ff;
+            border-radius: 12px 0 0 12px;
+            font-size: 1rem;
+        }
+
+        .add-pomodoro button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 0 12px 12px 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-pomodoro button:hover {
+            background: var(--primary-light);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 20px 0 10px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        .footer-content {
+            padding: 10px 0;
+        }
+
+        .footer p {
+            opacity: 0.85;
+            margin: 5px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .dashboard-welcome h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="{{ url_for('home') }}" class="logo">
+                <span class="logo-icon"></span>
+                ZenTask
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="{{ url_for('dashboard') }}" class="nav-link active">Bảng điều khiển</a>
+                </li>
+                <li class="nav-item"><a href="{{ url_for('pomodoro') }}" class="nav-link">Pomodoro</a></li>
+                <li class="nav-item"><a href="{{ url_for('flashcards') }}" class="nav-link">Flashcards</a></li>
+                <li class="nav-item"><a href="{{ url_for('logout') }}" class="nav-link">Đăng xuất</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-welcome">
+                <h1>Chào mừng, Bà con cô bác đến với ZenTask!</h1>
+                <p>Hãy bắt đầu phiên học tập hiệu quả của bạn</p>
+            </div>
+
+            <div class="dashboard-actions">
+                <div class="action-card">
+                    <h3>Pomodoro</h3>
+                    <p>Kỹ thuật quản lý thời gian giúp bạn tập trung học tập.</p>
+                    <a href="{{ url_for('pomodoro') }}" class="btn">Bắt đầu</a>
+                </div>
+                <div class="action-card">
+                    <h3>Flashcards</h3>
+                    <p>Hệ thống thẻ ghi nhớ giúp ôn tập kiến thức hiệu quả.</p>
+                    <a href="{{ url_for('flashcards') }}" class="btn">Ôn tập</a>
+                </div>
+            </div>
+
+            <div class="pomodoro-section">
+                <h2 class="section-title">Đồng hồ Pomodoro của bạn</h2>
+                <div class="pomodoros-list">
+                    {% for pomo in pomodoros %}
+                    <div class="pomodoro-item">
+                        <span class="minutes">{{ pomo }} phút</span>
+                        <a href="{{ url_for('pomodoro', selected=pomo) }}" class="start-btn">Bắt đầu</a>
+                    </div>
+                    {% endfor %}
+                </div>
+                <form method="POST" class="add-pomodoro">
+                    <input type="number" name="new_pomodoro" min="1" placeholder="Thêm đồng hồ mới (phút)" required>
+                    <button type="submit">Thêm</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>© 2025 ZenTask - Nền tảng học tập thông minh</p>
+                <p>Phát triển bởi Trần Khang</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

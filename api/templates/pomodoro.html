@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro - StudyWeb</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <meta http-equiv="refresh" content="60">
+    <style>
+        :root {
+            --primary: #4e73df;
+            --primary-light: #6c8bf5;
+            --secondary: #36b9cc;
+            --accent: #1cc88a;
+            --light: #f8f9fc;
+            --dark: #5a5c69;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --card-shadow: 0 10px 20px rgba(78, 115, 223, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7ff 0%, #e6e9ff 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin: 0 15px;
+        }
+
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .pomodoro-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 0;
+        }
+
+        .pomodoro-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            max-width: 500px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+            padding: 50px 30px;
+        }
+
+        .pomodoro-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: var(--gradient);
+        }
+
+        .timer {
+            font-size: 5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 30px 0;
+        }
+
+        .timer-info {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(78, 115, 223, 0.4);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(78, 115, 223, 0.5);
+        }
+
+        .btn-stop {
+            background: #e74a3b;
+        }
+
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 20px 0 10px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        .footer-content {
+            padding: 10px 0;
+        }
+
+        .footer p {
+            opacity: 0.85;
+            margin: 5px 0;
+        }
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .timer {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="{{ url_for('home') }}" class="logo">
+                <span class="logo-icon"></span>
+                ZenTask
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="{{ url_for('dashboard') }}" class="nav-link">Bảng điều khiển</a></li>
+                <li class="nav-item"><a href="{{ url_for('pomodoro') }}" class="nav-link active">Pomodoro</a></li>
+                <li class="nav-item"><a href="{{ url_for('flashcards') }}" class="nav-link">Flashcards</a></li>
+                <li class="nav-item"><a href="{{ url_for('logout') }}" class="nav-link">Đăng xuất</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="pomodoro-section">
+        <div class="container">
+            <div class="pomodoro-card">
+                <h2>Pomodoro Timer</h2>
+                <div class="timer">{{ minutes }}:00</div>
+                <p class="timer-info">Đang học tập... (tự động cập nhật mỗi phút)</p>
+                <a href="{{ url_for('dashboard') }}" class="btn btn-stop">Dừng lại</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>© 2025 ZenTask - Nền tảng học tập thông minh</p>
+                <p>Phát triển bởi Trần Khang</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
