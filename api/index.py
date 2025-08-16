@@ -1,8 +1,9 @@
 import os
 import json
-from flask import Flask, render_template, request, redirect, url_for, session, jsonify
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify, send_from_directory
 from werkzeug.utils import secure_filename
 import uuid
+
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'
 
@@ -38,6 +39,11 @@ def save_users(users):
         return True
     except IOError:
         return False
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route('/')
 def home():
