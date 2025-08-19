@@ -5,16 +5,17 @@ from werkzeug.utils import secure_filename
 import uuid
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key_here'
+import os
+app.secret_key = os.getenv("SECRET_KEY", "default_secret")
 
-USERS_FILE = 'users.json'
-
-# Cấu hình upload
-UPLOAD_FOLDER = 'static/uploads'
+USERS_FILE = '/data/users.json'
+UPLOAD_FOLDER = '/data/uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB
+
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # Tạo thư mục upload nếu chưa tồn tại
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
