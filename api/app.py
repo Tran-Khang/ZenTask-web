@@ -8,8 +8,9 @@ app = Flask(__name__)
 import os
 app.secret_key = os.getenv("SECRET_KEY", "default_secret")
 
-USERS_FILE = '/data/users.json'
-UPLOAD_FOLDER = '/data/uploads'
+USERS_FILE = 'users.json'
+UPLOAD_FOLDER = 'static/uploads'
+
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
